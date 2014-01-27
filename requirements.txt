@@ -1,2 +1,3 @@
 pika
 argh>=0.24.1
+xmltodict
