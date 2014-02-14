@@ -43,4 +43,12 @@ def consume(host, username, password, virtual_host, queue):
                                 password=password, virtual_host=virtual_host)
     connection.receive(callback, queue=queue)
 
-argh.dispatch_command(consume)
+def drain_call(*args, **kwargs):
+    print "draining"
+
+def drain(host, username, password, virtual_host, queue):
+    connection = AmqpConnection(host=host, username=username,
+                                password=password, virtual_host=virtual_host)
+    connection.receive(drain_call, queue=queue)
+
+argh.dispatch_commands([consume, drain])
